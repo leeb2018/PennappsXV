@@ -30,7 +30,7 @@ class JSONExtractor:
                 long_coord - the longtitude of the desired position
                 radius - the radius of the circle (in meters, I think)
         '''
-        my_url = generateURL_circle(lat_coord, long_coord, radius)
+        my_url = self.generateURL_circle(lat_coord, long_coord, radius)
         r = requests.get(my_url)
         json_list = r.json()
 
