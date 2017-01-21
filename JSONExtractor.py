@@ -35,8 +35,12 @@ class JSONExtractor:
         json_list = r.json()
 
         summaryByDate, summaryByCrime, walkScore = self.summarizeCrimeActivity(json_list)
+        data = {}
+        data["walk_score"] = walkScore
+        data["summary_by_date"] = summaryByDate
+        data["summary_by_crime"] = summaryByCrime
 
-        return walkScore
+        return data
 
 
     def summarizeCrimeActivity(self, json_list):
@@ -59,6 +63,7 @@ class JSONExtractor:
             long_coord = json_item['shape']['coordinates'][0]
             lat_coord = json_item['shape']['coordinates'][1]
             coords = json_item['shape']['coordinates']
+            coord = "" + str(long_coord) + ", " + str(lat_coord)
             crime = json_item['text_general_code']
             yyyymmdd = json_item['dispatch_date'].replace('-', '')
             time = json_item['dispatch_time']
@@ -67,9 +72,9 @@ class JSONExtractor:
             yyyymm = yyyymmdd[0:6] # extract out yyyymm
             if yyyymm not in summaryByDate.keys():
                 summaryByDate[yyyymm] = {}
-            if lat_coord not in summaryByDate[yyyymm].keys():
-                summaryByDate[yyyymm][lat_coord] = {}
-            summaryByDate[yyyymm][lat_coord][long_coord] = crime
+            if coord not in summaryByDate[yyyymm].keys():
+                summaryByDate[yyyymm][coord] = {}
+            summaryByDate[yyyymm][coord] = crime
 
             # Compute the WalkScore
             now = datetime.now()
@@ -118,9 +123,9 @@ class JSONExtractor:
             # Add to the summaryByCrime dictionary
             if crime not in summaryByCrime.keys():
                 summaryByCrime[crime] = {}
-            if lat_coord not in summaryByCrime[crime].keys():
-                summaryByCrime[crime][lat_coord] = {}
-            summaryByCrime[crime][lat_coord][long_coord] = yyyymmdd
+            if coord not in summaryByCrime[crime].keys():
+                summaryByCrime[crime][coord] = {}
+            summaryByCrime[crime][coord] = yyyymm
 
         return summaryByDate, summaryByCrime, walkScore
 

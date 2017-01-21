@@ -5,35 +5,101 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDI18CtSf0Zhay82k2YuGkGcrOyX5n1Qc0&callback=initMap"
     async defer></script>
     <script>
+      // global variables
+      var sumByCrime;
+      var sumByDate;
+      var infowindow = null;
+
+      // initialize google map with orgin/destination + markers
       function initMap() {
-          var origin = {lat: {{ o_lat }}, lng: {{ o_lng }}};
-          var destination = {lat: {{ d_lat }}, lng: {{ d_lng }}};
+        // origin and destination coordinates
+        var origin = {lat: {{ o_lat }}, lng: {{ o_lng }}};
+        var destination = {lat: {{ d_lat }}, lng: {{ d_lng }}};
 
-          var map = new google.maps.Map(document.getElementById('map'), {
-            center: origin,
-            scrollwheel: false,
-            zoom: 7
-          });
+        // Philadelphia crime data based on crime type
+        sumByCrime = {{ sum_by_crime|safe }};
+        // Philadelphia crime data based on crime date
+        sumByDate = {{ sum_by_date|safe }};
 
-          var directionsDisplay = new google.maps.DirectionsRenderer({
+        // create google map instance with specified centered & zoom
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: origin,
+          scrollwheel: false,
+          zoom: 7
+        });
+
+        var directionsDisplay = new google.maps.DirectionsRenderer({
+          map: map
+        });
+
+        // Set destination, origin and travel mode.
+        var request = {
+          destination: destination,
+          origin: origin,
+          travelMode: 'WALKING'
+        };
+
+        // Pass the directions request to the directions service.
+        var directionsService = new google.maps.DirectionsService();
+        directionsService.route(request, function(response, status) {
+          if (status == 'OK') {
+            // Display the route on the map.
+            directionsDisplay.setDirections(response);
+          }
+        });
+
+        // create and assign google map InfoWindow instance with a placeholder
+        infowindow = new google.maps.InfoWindow({
+                          content: "Placeholder"
+                        });
+
+        var counter = 1;
+
+        // list that contains relevant info for creating crime markers
+        var markers = []; 
+
+        // extract individual data from the sumByDate data table
+        for (var date in sumByDate) {
+          if (Number(date) > 201510) {
+            for (var coord in sumByDate[date]) {
+              counter++;
+
+              // list that contains relevant info for creating 
+              // a specific crime marker
+              var marker = [];
+
+              latlng = coord.split(", ");
+              position = {lat: Number(latlng[1]), lng: Number(latlng[0])};
+              crimeType = sumByDate[date][coord];
+
+              // populate marker info list
+              marker.push(position);
+              marker.push(crimeType);
+              marker.push(date);
+
+              // push maker info list into markers list
+              markers.push(marker);
+            }
+          }
+        }
+
+        // for loop to create markers and attach relevant infowindow to it
+        for (var i = 0; i < markers.length; i++) { 
+          // create marker instance 
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(markers[i][0]["lat"], 
+                                             markers[i][0]["lng"]),
             map: map
           });
 
-          // Set destination, origin and travel mode.
-          var request = {
-            destination: destination,
-            origin: origin,
-            travelMode: 'WALKING'
-          };
-
-          // Pass the directions request to the directions service.
-          var directionsService = new google.maps.DirectionsService();
-          directionsService.route(request, function(response, status) {
-            if (status == 'OK') {
-              // Display the route on the map.
-              directionsDisplay.setDirections(response);
+          // attach infowindow to the created marker instance
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.setContent("<p><b>Crime Type:</b> " + markers[i][1] + "</p>" + "<p><b>Date:</b> " + markers[i][2] + "</p>");
+              infowindow.open(map, marker);
             }
-          });
+          })(marker, i));
+        }
       }
     </script>
     <link rel = "stylesheet" type = "text/css" href = "static/result.css?q=14">
