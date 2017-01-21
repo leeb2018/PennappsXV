@@ -20,7 +20,7 @@ def summarizeCrimeActivity(json_list):
 
         long_coord = json_item['shape']['coordinates'][0]
         lat_coord = json_item['shape']['coordinates'][1]
-        crime_type = 
+        crime_type = json_item['text_general_code']
 
 
 	summary = {}
