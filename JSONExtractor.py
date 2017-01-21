@@ -34,7 +34,7 @@ class JSONExtractor:
         r = requests.get(my_url)
         json_list = r.json()
 
-        summaryByDate, summaryByCrime, walkScore = summarizeCrimeActivity(json_list)
+        summaryByDate, summaryByCrime, walkScore = self.summarizeCrimeActivity(json_list)
 
         return walkScore
 
