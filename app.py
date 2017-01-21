@@ -12,14 +12,16 @@ gmaps = googlemaps.Client(key='AIzaSyDI18CtSf0Zhay82k2YuGkGcrOyX5n1Qc0')
 
 @app.route("/")
 def main():
-	''' render the main page with tex box for users to input origin 
+	''' 
+	render the main page with tex box for users to input origin 
 	and destination.
     '''
 	return render_template('main.html')
 
 
 def calc_latlng_dist(lat1, lng1, lat2, lng2):
-	''' calculates distance between two given coordinates (lat1, lng1) and
+	''' 
+	calculates distance between two given coordinates (lat1, lng1) and
 	(lat2, lng2)
     '''
 	radlat1 = math.pi * lat1 / 180
@@ -36,7 +38,8 @@ def calc_latlng_dist(lat1, lng1, lat2, lng2):
 
 @app.route('/result', methods=['POST'])
 def process_data():
-	''' obtain user input and translate origin and destination to geo-coordinates.
+	''' 
+	obtain user input and translate origin and destination to geo-coordinates.
 	Using extracted information, acquire necessary information such as radius,
 	walk score, and filtered crime data. Then, pass acquired informtion to result()
 	to render it.
@@ -65,17 +68,16 @@ def process_data():
 	crime_data_by_date = data["summary_by_date"]
 	crime_data_by_crime = data["summary_by_crime"]
 
-	return result(origin, destination, o_geocode, d_geocode, radius, score,
-				  o_lat, o_lng, d_lat, d_lng, crime_data_by_crime, crime_data_by_date)
+	return result(origin, destination, score, o_lat, o_lng, d_lat, d_lng, 
+			      crime_data_by_crime, crime_data_by_date)
 
 
-def result(origin, dest, o_geocode, d_geocode, radius, score, 
-		   o_lat, o_lng, d_lat, d_lng, sum_by_crime, sum_by_date):
+def result(origin, dest, score, o_lat, o_lng, d_lat, d_lng, 
+		   sum_by_crime, sum_by_date):
 	''' render result page.'''
-	return render_template('result.html', origin=origin, d_geocode=d_geocode,
-						   destination=dest, o_geocode=o_geocode,
-						   radius=radius, score=score, o_lat=o_lat, o_lng=o_lng,
-						   d_lat=d_lat, d_lng=d_lng, sum_by_date=json.dumps(sum_by_date),
+	return render_template('result.html', origin=origin, destination=dest, 
+						   score=score, o_lat=o_lat, o_lng=o_lng, d_lat=d_lat, 
+						   d_lng=d_lng, sum_by_date=json.dumps(sum_by_date),
 						   sum_by_crime=json.dumps(sum_by_crime))
 
 
