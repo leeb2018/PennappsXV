@@ -46,14 +46,17 @@ def processor():
 	extractor = JSONExtractor()
 
 	score = extractor.generateWalkScore(lat, lng, radius)
+	
 
-	return result(origin, destination, o_geocode, d_geocode, radius, score)
+	return result(origin, destination, o_geocode, d_geocode, radius, score,
+				  o_lat, o_lng, d_lat, d_lng)
 
 
-def result(origin, dest, o_geocode, d_geocode, radius, score):
+def result(origin, dest, o_geocode, d_geocode, radius, score, o_lat, o_lng, d_lat, d_lng):
 	return render_template('result.html', origin=origin, d_geocode=d_geocode,
 						   destination=dest, o_geocode=o_geocode,
-						   radius=radius, score=score)
+						   radius=radius, score=score, o_lat=o_lat, o_lng=o_lng,
+						   d_lat=d_lat, d_lng=d_lng)
 
 
 if __name__ == "__main__":

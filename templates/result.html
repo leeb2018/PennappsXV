@@ -4,7 +4,38 @@
     <title>Safe Walk2</title>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDI18CtSf0Zhay82k2YuGkGcrOyX5n1Qc0&callback=initMap"
     async defer></script>
-    <script src="static/map.js?q=13"></script>
+    <script>
+      function initMap() {
+          var origin = {lat: {{ o_lat }}, lng: {{ o_lng }}};
+          var destination = {lat: {{ d_lat }}, lng: {{ d_lng }}};
+
+          var map = new google.maps.Map(document.getElementById('map'), {
+            center: origin,
+            scrollwheel: false,
+            zoom: 7
+          });
+
+          var directionsDisplay = new google.maps.DirectionsRenderer({
+            map: map
+          });
+
+          // Set destination, origin and travel mode.
+          var request = {
+            destination: destination,
+            origin: origin,
+            travelMode: 'WALKING'
+          };
+
+          // Pass the directions request to the directions service.
+          var directionsService = new google.maps.DirectionsService();
+          directionsService.route(request, function(response, status) {
+            if (status == 'OK') {
+              // Display the route on the map.
+              directionsDisplay.setDirections(response);
+            }
+          });
+      }
+    </script>
     <link rel = "stylesheet" type = "text/css" href = "static/result.css?q=14">
   </head>
   <body>
@@ -12,16 +43,14 @@
       <div class="title_container">
         <h1 class="title">Safe Walk2</h1>
         <div id="map"></div>
-        <h2 class="walk_score">Walk Score: 100</h2>
+        <h2 class="walk_score">Walk Score: {{ score }}</h2>
         <h3 class="origin">Origin: {{ origin }}</h3>
         <h3 class="o_geo">Origin Geocode: {{ o_geocode }}</h3>
         <h3 class="destination">Destination: {{ destination }}</h3>
         <h3 class="d_geo">Destination Geocode: {{ d_geocode }}</h3>
         <h3 class="radius">Radius: {{ radius }}</h3>
-        <h3 class="score">Walk Score: {{ score }}</h3>
         <form action="/">
-          <button type="submit" style="border: 0; background: transparent" value="/"/>
-          <img src="../static/refresh_btn.jpg" width="60" height="60" alt="submit" />
+          <button type="submit" value="/"/>
         </form>
       </div>
     </div>
