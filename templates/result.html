@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Safe Walk2</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDI18CtSf0Zhay82k2YuGkGcrOyX5n1Qc0&callback=initMap"
+    async defer></script>
+    <script src="static/map.js?q=13"></script>
+    <link rel = "stylesheet" type = "text/css" href = "static/result.css?q=14">
+  </head>
+  <body>
+    <div class="content_container">
+      <div class="title_container">
+        <h1 class="title">Safe Walk2</h1>
+        <div id="map"></div>
+        <h2 class="walk_score">Walk Score: 100</h2>
+        <h3 class="origin">Origin: {{ origin }}</h3>
+        <h3 class="o_geo">Origin Geocode: {{ o_geocode }}</h3>
+        <h3 class="destination">Destination: {{ destination }}</h3>
+        <h3 class="d_geo">Destination Geocode: {{ d_geocode }}</h3>
+        <form action="/">
+          <button type="submit" style="border: 0; background: transparent" value="/"/>
+          <img src="../static/refresh_btn.jpg" width="60" height="60" alt="submit" />
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
