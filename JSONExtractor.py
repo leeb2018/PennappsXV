@@ -33,7 +33,6 @@ class JSONExtractor:
         my_url = self.generateURL_circle(lat_coord, long_coord, radius)
         r = requests.get(my_url)
         json_list = r.json()
-        print(my_url)
 
         summaryByDate, summaryByCrime, walkScore = self.summarizeCrimeActivity(json_list)
         data = {}

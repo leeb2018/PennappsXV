@@ -63,7 +63,7 @@ def process_data():
 	extractor = JSONExtractor()
 
 	data = extractor.generateWalkScore(lat, lng, radius)
-	score = data["walk_score"]
+	score = "{0:.2f}".format(data["walk_score"])
 	crime_data_by_date = data["summary_by_date"]
 	crime_data_by_crime = data["summary_by_crime"]
 
