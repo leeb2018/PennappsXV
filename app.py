@@ -2,8 +2,7 @@ import googlemaps
 import math
 import json
 from JSONExtractor import *
-from flask import Flask, jsonify, json, request
-from flask import render_template
+from flask import Flask, jsonify, json, request, render_template
 
 
 app = Flask(__name__)
@@ -47,6 +46,7 @@ def process_data():
     # Extract/transform input
 	origin = request.form["origin"]
 	destination = request.form["destination"]
+	print(gmaps.geocode(origin))
 	o_geocode = gmaps.geocode(origin)[0]["geometry"]["location"]
 	d_geocode = gmaps.geocode(destination)[0]["geometry"]["location"]
 	o_lat = o_geocode["lat"]
