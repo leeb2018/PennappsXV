@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Safe Walk2</title>
-    <link rel = "stylesheet" type = "text/css" href = "static/main.css?q=15">
+    <title>Lighthouse</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet">
+    <link rel = "stylesheet" type = "text/css" href = "static/main.css?q=63">
+    <script src="https://use.fontawesome.com/3e8db64afa.js"></script>
   </head>
   <body>
-    <div class="content_container">
-      <div class="title_container">
-        <h1 class="title">Safe Walk2</h1>
-        <div class="container">
-	        <form action="/result" method="post" class="Search">
-            <div class="test_container">
-  	          <input class="origin" type="search" placeholder="Origin" onfocus="this.placeholder = ''" name="origin">
-  	          <input class="destination" type="search" placeholder="Destination" onfocus="this.placeholder = ''" name="destination">
-            </div>
-	          <button type="submit" value="Submit">Submit</button>
-	        </form>
-      	</div>
+    <div class="main_container container-fluid col-xs-12 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
+      <h1 class="title"><img src="../static/lighthouse.png" align="middle">Lighthouse</h1>
+      <div class="form_container container-fluid">
+        <form action="/result" method="post" class="Search">
+          <input class="addr1 origin form-control" placeholder="Origin" onfocus="this.placeholder = ''" onblur = "this.placeholder = 'Origin'" name="origin">
+	         <input class="addr2 destination form-control" placeholder="Destination" onfocus="this.placeholder = ''" onblur = "this.placeholder = 'Destination'" name="destination">
+          <button class="btn btn-primary btn-lg btn-block" type="submit" value="Submit">Search for the Route</button>
+        </form>
       </div>
     </div>
   </body>

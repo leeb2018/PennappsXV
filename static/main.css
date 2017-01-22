@@ -1,3 +1,54 @@
-.test_container {
-	background-color: yellow;
+body{
+	background-color: #cdeef2;
+}
+
+.main_container {
+	height: 80%;
+	margin-top: 10%;
+	font-family: 'Overpass', sans-serif;
+}
+
+.form_container {
+	background-color: #3399FF;
+	padding-bottom: 13px;
+	border-radius: 6px;
+	font-size: 27px;
+}
+
+img {
+	height: 68px;
+	width: 68px;
+	margin-bottom: 8px;
+}
+
+.fa-arrow-down {
+	width: 100%;
+	color: #337ab7;
+	text-align: center;
+}
+
+.addr1 {
+	margin-top: 13px;
+	margin-bottom: 13px;
+	font-size: 24px;
+}
+
+.addr2 {
+	margin-top: 13px;
+	margin-bottom: 23px;
+	font-size: 24px;
+}
+
+.search_btn {
+	width: 90%;
+	margin-top: 20px;
+}
+
+.title {
+	margin-top: 10%;
+	margin-bottom: 10%;
+	text-align: center;
+	font-size: 600%;
+	font-weight: bold;
+	color: #4F4F4F;
 }

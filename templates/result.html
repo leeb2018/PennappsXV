@@ -103,19 +103,22 @@
         }
       }
     </script>
-    <link rel = "stylesheet" type = "text/css" href = "static/result.css?q=14">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel = "stylesheet" type = "text/css" href = "static/result.css?q=15">
   </head>
   <body>
-    <div class="content_container">
+    <div class="content_container" align=center>
       <div class="title_container">
-        <h1 class="title">Safe Walk2</h1>
-        <div id="map"></div>
-        <h2 class="walk_score">Walk Score: {{ score }}</h2>
-        <h3 class="origin">Origin: {{ origin }}</h3>
-        <h3 class="destination">Destination: {{ destination }}</h3>
-        Request a Walking Escort: <a href="tel:215-898-9255">215-898-9255</a>
+        <h1 class="walk_score"><center>WALK SCORE: {{ score }}<center></h1>
+        <div id="map" style=text-align:center></div>
+        <h2 class="origin"><center>Origin: {{ origin }}</center></h2>
+        <h2 class="destination"><center>Destination: {{ destination }}</center></h2>
+        <h2 class="number"><center> CALL PENN POLICE: 215-573-3333 </center></h2>
         <form action="/">
-          <button type="submit" value="/"/>Back to Main Page </button>
+          <button type="submit" value="/"/> Input Another Trip </button>
         </form>
       </div>
     </div>
