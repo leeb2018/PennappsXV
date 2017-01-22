@@ -46,7 +46,6 @@ def process_data():
     # Extract/transform input
 	origin = request.form["origin"]
 	destination = request.form["destination"]
-	print(gmaps.geocode(origin))
 	o_geocode = gmaps.geocode(origin)[0]["geometry"]["location"]
 	d_geocode = gmaps.geocode(destination)[0]["geometry"]["location"]
 	o_lat = o_geocode["lat"]
