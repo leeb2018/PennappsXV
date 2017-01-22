@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Safe Walk2</title>
-    <link rel = "stylesheet" type = "text/css" href = "static/main.css?q=14">
+    <link rel = "stylesheet" type = "text/css" href = "static/main.css?q=15">
   </head>
   <body>
     <div class="content_container">
@@ -10,8 +10,10 @@
         <h1 class="title">Safe Walk2</h1>
         <div class="container">
 	        <form action="/result" method="post" class="Search">
-	          <input class="origin" type="search" placeholder="Origin" onfocus="this.placeholder = ''" name="origin">
-	          <input class="destination" type="search" placeholder="Destination" onfocus="this.placeholder = ''" name="destination">
+            <div class="test_container">
+  	          <input class="origin" type="search" placeholder="Origin" onfocus="this.placeholder = ''" name="origin">
+  	          <input class="destination" type="search" placeholder="Destination" onfocus="this.placeholder = ''" name="destination">
+            </div>
 	          <button type="submit" value="Submit">Submit</button>
 	        </form>
       	</div>
